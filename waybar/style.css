@@ -1,0 +1,54 @@
+* {
+    font-family: Terminus;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+window#waybar {
+    background-color: #16181e;
+    border-bottom: 3px solid #32393f;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+}
+
+#workspaces {
+    padding-right: 10px;
+    border-right: 2px solid #32393f;
+}
+
+#workspaces button {
+    padding: 0 5px;
+}
+
+#workspaces button:hover {
+    background: #59656e;
+    box-shadow: inset 0px -3px #ffffff;
+}
+
+#workspaces button.focused {
+    background: #59656e;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#window {
+    padding-left: 10px;
+}
+
+#clock,
+#cpu,
+#memory,
+#language,
+#pulseaudio,
+#tray {
+    padding-left: 10px; 
+    padding-right: 10px;
+    padding: 0px 10px;
+
+    border-left: 2px solid #32393f;
+}

@@ -1,0 +1,22 @@
+{
+    "layer": "top",
+    "modules-left": ["sway/workspaces", "sway/window"],
+    "modules-center": [],
+    "modules-right": ["pulseaudio", "cpu", "memory", "sway/language", "clock", "tray"],
+    "sway/window": {
+        "max-length": 50
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "out {volume}% {format_source}",
+        "format-muted": "{format_source}",
+        "format-source": "in {volume}%",
+        "format-source-muted": "muted",
+        "on-click": "pavucontrol"
+    },
+    "clock": {
+        "interval": 1,
+        "format": "{:%T}",
+        "format-alt": "{:%F %T}"
+    }
+}
