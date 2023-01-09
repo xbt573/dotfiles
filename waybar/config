@@ -1,5 +1,5 @@
 {
-    "layer": "top",
+//    "layer": "top",
     "modules-left": ["sway/workspaces", "sway/window"],
     "modules-center": [],
     "modules-right": ["pulseaudio", "cpu", "memory", "sway/language", "clock", "tray"],

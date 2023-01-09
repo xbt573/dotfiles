@@ -19,13 +19,14 @@ set $term foot
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu bemenu-run
+#set $menu bemenu-run -n
+set $menu bemenu-run -H 24 --tb "#16181e" --tf "#ffffff" --fb "#16181e" --ff "#ffffff" --nb "#16181e" --nf "#ffffff" --hb "#16181e" --nf "#ffffff" --fbb "#16181e" --fbf "#ffffff" --sb "#ffffff" --sf "#16181e" --ab "#16181e" --af "#ffffff"
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg /home/xbt573/.wallpapers/99791.jpg fill
+output * bg /home/xbt573/.wallpapers/back.png fill
 #
 # Example configuration:
 #
@@ -233,18 +234,19 @@ bindsym Ctrl+Print exec grim - | wl-copy -t image/png
 bindsym Ctrl+Shift+Print exec grim -g "$(slurp)" - | wl-copy -t image/png
 
 exec gentoo-pipewire-launcher &
+exec mako &
 exec_always bash /home/xbt573/.config/waybar/launch.sh
 
-set $bg 	#d65d0e
-set $bg-inactive   #323232
-set $bg-urgent     #000000
-set $text          #eeeeec
-set $text-inactive #babdb6
+set $bg 	       #7e8f9e
+set $bg-inactive   #16181e
+set $bg-urgent     #eb4d4b
+set $text          #ffffff
+set $text-inactive #ffffff
 
 set $bar           #323232
 set $statusline    #e0e0e0
 
-client.focused          $bg           $bg          $text          $bg $bg
+client.focused          $bg           $bg          $text          $bg  $bg
 client.unfocused        $bg-inactive  $bg-inactive $text-inactive $bar $bar
 client.focused_inactive $bg-inactive  $bg-inactive $text-inactive $bar $bar
 client.urgent           $bg-urgent    $bg-urgent   $text          $bar $bar
