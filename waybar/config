@@ -6,13 +6,20 @@
     "sway/window": {
         "max-length": 50
     },
+    "cpu": {
+        "interval": 1,
+    },
+    "memory": {
+        "interval": 1,
+    },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "out {volume}% {format_source}",
         "format-muted": "{format_source}",
         "format-source": "in {volume}%",
         "format-source-muted": "muted",
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Echo Cancellation Sink"]
     },
     "clock": {
         "interval": 1,

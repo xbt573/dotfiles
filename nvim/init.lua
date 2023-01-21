@@ -66,7 +66,6 @@ return require('packer').startup(function(use)
             require('gruvbox').setup {
                 italic = false,
                 contrast = "hard",
-                transparent_mode = true,
             }
             vim.cmd('colorscheme gruvbox')
         end
@@ -136,9 +135,6 @@ return require('packer').startup(function(use)
             'hrsh7th/vim-vsnip',
             'hrsh7th/cmp-vsnip',
 
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
-
             'SmiteshP/nvim-navic'
         },
         config = function()
@@ -153,6 +149,8 @@ return require('packer').startup(function(use)
             -- Use an on_attach function to only map the following keys
             -- after the language server attaches to the current buffer
             local on_attach = function(client, bufnr)
+                require('inlay-hints').on_attach(client, bufnr)
+                require('nvim-navic').attach(client, bufnr)
                 -- Enable completion triggered by <c-x><c-o>
                 vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -176,58 +174,48 @@ return require('packer').startup(function(use)
                 vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
             end
 
-            require("mason").setup()
-            require("mason-lspconfig").setup()
-            require("mason-lspconfig").setup_handlers {
-                function(server_name)
-                    require("lspconfig")[server_name].setup {
-                        on_attach = on_attach
-                    }
-                end,
 
-                ["gopls"] = function()
-                    require('lspconfig').gopls.setup {
-                        on_attach = function(c, b)
-                            on_attach(c, b)
-                            require('inlay-hints').on_attach(c, b)
-                            require('nvim-navic').attach(c, b)
-                        end,
-                        settings = {
-                            gopls = {
-                                hints = {
-                                    assignVariableTypes = true,
-                                    compositeLiteralFields = true,
-                                    constantValues = true,
-                                    parameterNames = true,
-                                    rangeVariableTypes = true,
-                                }
-                            }
+            require('lspconfig').gopls.setup {
+                on_attach = on_attach,
+                settings = {
+                    gopls = {
+                        hints = {
+                            assignVariableTypes = true,
+                            compositeLiteralFields = true,
+                            constantValues = true,
+                            parameterNames = true,
+                            rangeVariableTypes = true,
                         }
                     }
-                end,
-
-                ["sumneko_lua"] = function()
-                    require 'lspconfig'.sumneko_lua.setup {
-                        on_attach = on_attach,
-                        settings = {
-                            Lua = {
-                                runtime = {
-                                    version = 'LuaJIT',
-                                },
-                                diagnostics = {
-                                    globals = { 'vim' },
-                                },
-                                workspace = {
-                                    library = vim.api.nvim_get_runtime_file("", true),
-                                },
-                                telemetry = {
-                                    enable = false,
-                                },
-                            },
-                        },
-                    }
-                end
+                }
             }
+
+
+            require('lspconfig').sumneko_lua.setup {
+                on_attach = on_attach,
+                settings = {
+                    Lua = {
+                        runtime = {
+                            version = 'LuaJIT',
+                        },
+                        diagnostics = {
+                            globals = { 'vim' },
+                        },
+                        workspace = {
+                            library = vim.api.nvim_get_runtime_file("", true),
+                        },
+                        telemetry = {
+                            enable = false,
+                        },
+                    },
+                },
+            }
+
+            require('lspconfig').ruby_ls.setup {
+                on_attach = on_attach
+            }
+
+
             local cmp = require('cmp')
             cmp.setup({
                 snippet = {

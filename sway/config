@@ -233,8 +233,11 @@ default_floating_border none
 bindsym Ctrl+Print exec grim - | wl-copy -t image/png
 bindsym Ctrl+Shift+Print exec grim -g "$(slurp)" - | wl-copy -t image/png
 
+exec dbus-update-activation-environment XDG_CURRENT_DESKTOP=sway
 exec gentoo-pipewire-launcher &
 exec mako &
+exec /usr/libexec/xdg-desktop-portal -r &
+exec /usr/libexec/xdg-desktop-portal-wlr -r &
 exec_always bash /home/xbt573/.config/waybar/launch.sh
 
 set $bg 	       #7e8f9e
